@@ -21,10 +21,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'catalog',
-    'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.admin',  # Админ-панель
+    'django.contrib.auth',  # Вход, Выход, Сброс пароля, Изменение пароля
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions',  # Работа с сессиями
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -116,3 +116,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# LOGIN_REDIRECT_URL = '/'  # Указание следующей страницы после того как вы вошли в аккаунт
+# Для симуляции отправки почты (нереально) а в терминал.
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
