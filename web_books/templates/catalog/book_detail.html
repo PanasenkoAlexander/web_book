@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+<!-- Блок Заголовка -->
+{% block title %}Мир книг ({{ book.title }}){% endblock %}
+
+<!-- Блок Контента -->
+{% block content %}
+    <h3>Название книги: {{ book.title }}</h3>
+    <p><b>Жанр: </b>{{ book.genre }}</p>
+    <p><b>Аннотация: </b>{{ book.summary }}</p>
+    <p><b>ISBN: </b>{{ book.isbn }}</p>
+    <p><b>Язык: </b>{{ book.language }}</p>
+    <p><b>Автор(ы): </b>{{ book.get_authors }}</p>
+
+    <h4>Количество экземпляров книг в БД</h4>
+
+    <ul>
+    {% for instance in book.bookinstance_set.all %}
+        <li>№{{ instance.inv_nom }} {{ instance.book }} <span class="
+        {% if instance.status.name == 'На складе' %}
+        text-primary
+        {% else %}
+        text-danger
+        {% endif %}">({{ instance.status }})</span><br><span class="text-muted">Издательство: {{ instance.imprint }}</span></li>
+        <hr>
+    {% endfor %}
+    </ul>
+{% endblock %}
