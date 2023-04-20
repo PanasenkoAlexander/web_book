@@ -8,7 +8,7 @@
 <h1>Главная страница</h1>
 
 <!-- Базовая проверка на Аутентификацию пользователя -->
-<!-- {{ user.is_authenticated }} - True/False вошли ли вы в аккаунт или нет -->
+<!-- {{ user.is_authenticated }} - True/False вошли ли вы в аккаунт или нет-->
 <!-- {{ user.get_username }} - Username вошедшего аккаунта -->
 {% if user.is_authenticated %}
     {% if user.get_username == "admin" %}

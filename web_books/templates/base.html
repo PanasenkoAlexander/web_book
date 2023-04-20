@@ -28,10 +28,20 @@
         <div class="row">  <!-- Вторая строка -->
             <!-- Блок Меню -->
             <div class="col-3">  <!-- Столбик на 3 позиций -->
+                <!-- Меню Основное -->
                 <ul class="menu">
                     <li><a href="{% url 'index' %}">Главная</a></li>
                     <li><a href="{% url 'books' %}">Все книги</a></li>
                     <li><a href="{% url 'authors' %}">Все авторы</a></li>
+                </ul>
+                <!-- Меню Авторизации -->
+                <ul class="menu">
+                    {% if user.is_authenticated %}
+                        <li><a href="/accounts/logout?next={{ request.path }}">Выйти</a></li>
+                    {% else %}
+                        <li><a href="/accounts/login?next={{ request.path }}">Войти</a></li>
+                        <li><a href="{% url 'registration' %}">Регистрация</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- Блок Контента -->

@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *  # Импорт всех моделей
+from .forms import *  # Импорт всех форм
 from django.views import generic  # Нужно для автоматического чтения модели
+from django.contrib.auth.views import LoginView
 
 
 # Главная страница
@@ -26,13 +28,31 @@ def index(request):
 
 # Страница регистрации аккаунта
 def registration(request):
-    # Создать форму.
-    # Генерация context.
-    # Получаем данные из формы.
-    # Записываем данные в БД (нового пользователя).
-    # User.objects.create_user(login, email, password).save()
-    # Показываем шаблон.
-    return render(request, "registration/registration.html")
+    if request.method == "GET":
+        # Создать форму
+        form = Registration()
+        # Генерация context
+        context = {"form": form}
+        # Показываем шаблон
+        return render(request, "registration/registration.html", context=context)
+    if request.method == "POST":
+        # Получаем данные из формы
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
+        # Записываем данные в БД (нового пользователя)
+        User.objects.create_user(username, email, password).save()
+        # Генерация context
+        context = {"username": username}
+        # Показываем шаблон.
+        return render(request, "registration/registration.html", context=context)
+
+
+# Страница Входа в аккаунт (Переназначение)
+class LoginUser(LoginView):
+    form_class = Login
+    template_name = "registration\login.html"
+
 
 
 # Список всех книг (Автоматически генерируется при помощи ListView)

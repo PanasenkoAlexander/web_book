@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    Регистрация
-</body>
-</html>
+{% extends "base.html" %}
+
+<!-- Блок Заголовка -->
+{% block title %}Мир книг (регистрация){% endblock %}
+
+<!-- Блок Контента -->
+{% block content %}
+    <!-- Показываем форму только тогда когда GET -->
+    {% if form %}
+     <div class="container">
+            <div class="row">
+                <h2>Пройдите регистрацию</h2>
+                <br>
+                <div class="col-6 text-center">
+                <form class="row g-2 p-md-4 border rounded-3 bg-light" method="post" action="">
+                    {% csrf_token %}
+                    <!-- Первое поле (Логин) -->
+                    <div class="form-floating mb-2">
+                        {{ form.username }}
+                        <label for="floatingInput">{{ form.username.label }}:</label>
+                    </div>
+                    <!-- Второе поле (Пароль) -->
+                    <div class="form-floating mb-2">
+                        {{ form.password }}
+                        <label for="floatingPassword">{{ form.password.label }}:</label>
+                    </div>
+                    <!-- Третье поле (Email) -->
+                    <div class="form-floating mb-2">
+                        {{ form.email }}
+                        <label for="floatingInput">{{ form.email.label }}:</label>
+                    </div>
+                    <br><button type="submit" class="btn btn-warning">Зарегистрироваться</button>
+                </form>
+                </div>
+            <div class="col-6"></div>  <!-- Правая пустая часть (3 позиции) -->
+        </div>
+    </div>
+    {% endif %}
+    <!-- Показываем ТЕКСТ ОКНЧАНИЯ РЕГИСТРАЦИИ только тогда когда POST -->
+    {% if username %}
+    <h4>Вы успешно зарегистрировались.</h4>
+    <p>Ваш логин: {{ username }}.</p>
+    {% endif %}
+{% endblock %}

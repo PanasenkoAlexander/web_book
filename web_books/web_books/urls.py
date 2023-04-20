@@ -5,6 +5,7 @@ from catalog import views
 urlpatterns = [
     # Админка и Аккаунты
     path('admin/', admin.site.urls),
+    path('accounts/login/', views.LoginUser.as_view(), name="login"),  # Маршрут для входа (Переназначение)
     path('accounts/', include("django.contrib.auth.urls")),  # Маршрут для работы с аккаунтами
     path('accounts/registration', views.registration, name="registration"),  # Маршрут для регистрации
 

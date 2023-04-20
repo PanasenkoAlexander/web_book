@@ -21,10 +21,15 @@
     <div class="btn-group" role="group" aria-label="Second group">
         {% if page_obj.has_previous %}
         <a class="btn btn-sm btn-outline-secondary" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        {% else %}
+        <a class="btn btn-sm btn-outline-secondary" href="#">Предыдущая</a>
         {% endif %}
-        <a class="btn btn-sm btn-outline-secondary" href="#">{{ page_obj.number }}</a>
+        <!-- Нумерация страниц-->
+        <a class="btn btn-sm btn-outline-secondary" href="#">{{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</a>
         {% if page_obj.has_next %}
         <a class="btn btn-sm btn-outline-secondary" href="{{ request.path }}?page={{ page_obj.next_page_number }}">Следующая</a>
+        {% else %}
+        <a class="btn btn-sm btn-outline-secondary" href="#">Следующая</a>
         {% endif %}
     </div>
     <!-- Конец. Кнопки перехода между страницами -->
